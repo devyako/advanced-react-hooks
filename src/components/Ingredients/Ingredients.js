@@ -24,9 +24,13 @@ const Ingredients = () => {
   };
 
   const deleteIngredientHandler = (id) => {
-    setUserIngredients((prevIngredient) =>
-      prevIngredient.filter((ingredient) => ingredient.id !== id)
-    );
+    fetch(`https://react-hooks-eb9cc.firebaseio.com/ingredients/${id}.json`, {
+      method: "DELETE",
+    }).then((response) => {
+      setUserIngredients((prevIngredient) =>
+        prevIngredient.filter((ingredient) => ingredient.id !== id)
+      );
+    });
   };
 
   const filteredIngredientsHandler = useCallback((filteredIngredients) => {
@@ -39,6 +43,7 @@ const Ingredients = () => {
 
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
+
         <IngredienList
           ingredients={userIngredients}
           onRemoveItem={deleteIngredientHandler}
