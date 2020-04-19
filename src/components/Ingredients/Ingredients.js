@@ -39,7 +39,6 @@ const Ingredients = () => {
 
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
-
         <IngredienList
           ingredients={userIngredients}
           onRemoveItem={deleteIngredientHandler}
